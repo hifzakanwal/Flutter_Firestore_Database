@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'homescreen.dart';
 
 class addStudent extends StatefulWidget {
   const addStudent({super.key});
@@ -8,8 +11,10 @@ class addStudent extends StatefulWidget {
 }
 
 class _addStudentState extends State<addStudent> {
-  final emailcon = TextEditingController();
-  final passwordcon = TextEditingController();
+  final namecon = TextEditingController();
+  final rollnocon = TextEditingController();
+
+  bool ispressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +24,7 @@ class _addStudentState extends State<addStudent> {
         child: Column(
           children: [
             TextFormField(
-              controller: emailcon,
+              controller: namecon,
               decoration: InputDecoration(
                 label: Text("Name"),
                 hintText: "Enter Your Name",
@@ -35,7 +40,7 @@ class _addStudentState extends State<addStudent> {
               height: 10,
             ),
             TextFormField(
-              controller: passwordcon,
+              controller: rollnocon,
               decoration: InputDecoration(
                 label: Text("Roll-No"),
                 hintText: "Enter Your Roll Number",
@@ -50,10 +55,36 @@ class _addStudentState extends State<addStudent> {
             SizedBox(
               height: 25,
             ),
-            ElevatedButton(onPressed: () {}, child: Text("Register"))
+            ElevatedButton(
+                onPressed: () async {
+                  setState(() {
+                    var name = namecon.text;
+                    var rollNo = rollnocon.text;
+                    adduser(name);
+                  });
+                },
+                child: Text("Register"))
           ],
         ),
       ),
     );
+  }
+
+  Future<void> adduser(var name) async {
+    print("Added");
+    CollectionReference user =
+        FirebaseFirestore.instance.collection('students');
+    // String uId = DateTime.now().microsecondsSinceEpoch.toString();
+    String uId = '7575';
+    // String name = 'hifza';
+//default random id set
+    // return user.add({'uId': uId, 'name': name})
+//set id is 7575
+    return await user
+        .doc(uId)
+        .set({'uId': uId, 'name': name})
+        .then((value) => Navigator.push(
+            context, MaterialPageRoute(builder: ((context) => homescreen()))))
+        .onError((error, stackTrace) => print("Error"));
   }
 }

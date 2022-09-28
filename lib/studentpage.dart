@@ -10,6 +10,7 @@ class studentPage extends StatefulWidget {
 }
 
 class _studentPageState extends State<studentPage> {
+  CollectionReference user = FirebaseFirestore.instance.collection('students');
   final Stream<QuerySnapshot> getdeta =
       FirebaseFirestore.instance.collection('students').snapshots();
 
@@ -65,7 +66,7 @@ class _studentPageState extends State<studentPage> {
                                     child: Container(
                                   color: Color.fromARGB(255, 17, 100, 168),
                                   child: Center(
-                                      child: Text("Roll-No",
+                                      child: Text("Id",
                                           style:
                                               TextStyle(color: Colors.white))),
                                 )),
@@ -87,7 +88,8 @@ class _studentPageState extends State<studentPage> {
                                 TableCell(
                                     child: Padding(
                                   padding: const EdgeInsets.only(top: 10),
-                                  child: Center(child: Text(userData['name'])),
+                                  child:
+                                      Center(child: Text(userData['rollNo'])),
                                 )),
                                 TableCell(
                                     child: Padding(
@@ -108,7 +110,9 @@ class _studentPageState extends State<studentPage> {
                                                 Color.fromARGB(255, 0, 107, 96),
                                           )),
                                       IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            deleteuser(userData['uId']);
+                                          },
                                           icon: Icon(
                                             Icons.delete,
                                             color: Colors.red,
@@ -126,5 +130,11 @@ class _studentPageState extends State<studentPage> {
               ;
               return Text("data");
             }));
+  }
+
+  Future<void> deleteuser(String id) {
+    return user
+        .doc(id)
+        .delete(); // when we store data by our id then use set method
   }
 }

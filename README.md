@@ -1,16 +1,14 @@
-# firestore
+# Firestore Database
 
-A new Flutter project.
+C: Add data to firebase firestore database
 
-## Getting Started
+R: Fetch data from firebase firestore database
 
-This project is a starting point for a Flutter application.
+U: Update data in firebase firestore database
 
-A few resources to get you started if this is your first Flutter project:
+D: Delete data from firebase firestore database
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## CRUD
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://user-images.githubusercontent.com/110696495/193123942-dde1d547-1367-4b60-8a4b-ff8251d78caa.mp4
+

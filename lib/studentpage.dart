@@ -39,6 +39,7 @@ class _studentPageState extends State<studentPage> {
                     itemBuilder: (context, index) {
                       Map<String, dynamic> userData = snapshot.data!.docs[index]
                           .data() as Map<String, dynamic>;
+
                       return SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Padding(
@@ -102,7 +103,9 @@ class _studentPageState extends State<studentPage> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        updateStudent()));
+                                                        updateStudent(
+                                                          id: userData['uId'],
+                                                        )));
                                           },
                                           icon: Icon(
                                             Icons.edit,
